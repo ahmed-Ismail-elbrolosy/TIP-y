@@ -1,0 +1,89 @@
+<mujoco model="cartpole_triple">
+  <compiler angle="radian" autolimits="true" />
+
+  <option timestep="0.005" gravity="0 0 -9.81" integrator="RK4" />
+
+  <default>
+    <geom contype="0" conaffinity="0" />
+  </default>
+
+  <visual>
+    <headlight diffuse="0.7 0.7 0.7" ambient="0.3 0.3 0.3" specular="0.1 0.1 0.1" />
+    <rgba haze="0.15 0.2 0.25 1" />
+  </visual>
+
+  <asset>
+    <material name="floor_mat" rgba="0.16 0.22 0.28 1" />
+    <material name="metal_mat" rgba="0.65 0.68 0.72 1" />
+    <material name="cart_mat" rgba="0.82 0.18 0.18 1" />
+    <material name="pole1_mat" rgba="0.2 0.75 0.3 1" />
+    <material name="pole2_mat" rgba="0.2 0.3 0.75 1" />
+    <material name="pole3_mat" rgba="0.2 0.3 0 1" />
+    <material name="site_mat" rgba="0.95 0.9 0.15 0.9" />
+  </asset>
+
+  <worldbody>
+    <light diffuse="0.7 0.7 0.7" pos="0 0 3.5" dir="0 0 -1" />
+    <camera name="main" pos="0 3.0 1.3" xyaxes="1 0 0 0 0 1" fovy="45" />
+    <geom name="floor" type="plane" size="5 5 0.1" material="floor_mat" />
+    <body name="frame">
+      <geom name="tower_left" type="box" pos="-1.3 0 0.4" size="0.1 0.15 0.8" material="metal_mat" />
+      <geom name="tower_right" type="box" pos="1.3 0 0.4" size="0.1 0.15 0.8" material="metal_mat" />
+      <geom name="rail" type="box" pos="0 0 0.85" size="1.3 0.05 0.05" material="metal_mat" />
+    </body>
+    <body name="cart" pos="0 0 1">
+      <joint name="cart_slide" type="slide" axis="1 0 0" range="-1 1" frictionloss="0.1" />
+
+      <geom name="cart_geom" type="box" size="0.15 0.08 0.1" mass="2.0" material="cart_mat" />
+      <site name="cart_center_site" pos="0 0 0" size="0.02" type="sphere" material="site_mat" />
+      <geom name="mount_pin" type="capsule" pos="0 0.095 0" axisangle="1 0 0 1.5708"
+        size="0.015 0.03"
+        material="metal_mat" />
+
+      <body name="pole1" pos="0 0.11 0">
+        <joint name="pole1_hinge" type="hinge" axis="0 1 0" range="-3.14159 3.14159"
+          frictionloss="0.03" />
+        <site name="pole1_hinge_site" pos="0 0 0" size="0.015" type="sphere" material="site_mat" />
+        <geom name="pole1_geom" type="box" pos="0 0 0.15" size="0.02 0.01 0.15" mass="0.5"
+          material="pole1_mat" />
+        <site name="pole1_tip_site" pos="0 0 0.3" size="0.015" type="sphere" material="site_mat" />
+        <geom name="pole2_mount_pin" type="capsule" pos="0 0.015 0.3" axisangle="1 0 0 1.5708"
+          size="0.012 0.015"
+          material="metal_mat" />
+
+        <body name="pole2" pos="0 0.03 0.3">
+          <joint name="pole2_hinge" type="hinge" axis="0 1 0" range="-3.14159 3.14159"
+            frictionloss="0.03" />
+          <site name="pole2_hinge_site" pos="0 0 0" size="0.015" type="sphere" material="site_mat" />
+          <geom name="pole2_geom" type="box" pos="0 0 0.15" size="0.02 0.01 0.15" mass="0.5"
+            material="pole2_mat" />
+          <site name="pole2_tip_site" pos="0 0 0.3" size="0.015" type="sphere" material="site_mat" />
+
+          <geom name="pole3_mount_pin" type="capsule" pos="0 0.015 0.3" axisangle="1 0 0 1.5708"
+            size="0.012 0.015"
+            material="metal_mat" />
+          <body name="pole3" pos="0 0.03 0.3">
+            <joint name="pole3_hinge" type="hinge" axis="0 1 0" range="-3.14159 3.14159"
+              frictionloss="0.03" />
+            <site name="pole3_hinge_site" pos="0 0 0" size="0.015" type="sphere" material="site_mat" />
+            <geom name="pole3_geom" type="box" pos="0 0 0.15" size="0.02 0.01 0.15" mass="0.5"
+              material="pole3_mat" />
+            <site name="pole3_tip_site" pos="0 0 0.3" size="0.015" type="sphere" material="site_mat" />
+
+          </body>
+
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <position
+      name="cart_pos_actuator"
+      joint="cart_slide"
+      kp="2800"
+      kv="1400"
+      ctrlrange="-1 1"
+    />
+  </actuator>
+</mujoco>

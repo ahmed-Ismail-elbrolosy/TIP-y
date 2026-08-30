@@ -1,0 +1,36 @@
+services:
+  matlab:
+    image: mathworks/matlab:r2024a
+    container_name: tipy-matlab
+    init: true
+    restart: unless-stopped
+    shm_size: 1gb
+    command: ["-browser"]
+    ports:
+      - "127.0.0.1:8888:8888"
+    environment:
+      USER_NAME: ${HOSTNAME:-tipy}
+      USER_UID: "1000"
+      USER_GID: "1000"
+    volumes:
+      - matlab-config:/home/matlab/.matlab
+      - matlab-appdata:/home/matlab/.MathWorks
+      - ../../:/home/matlab/work/TIPy:rw
+      - ./workspace:/home/matlab/work/workspace:rw
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, utility, compute]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8888/index.html || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 5m
+
+volumes:
+  matlab-config:
+  matlab-appdata:
