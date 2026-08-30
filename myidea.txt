@@ -1,0 +1,27 @@
+what is the idea
+the idea is to learn modeling and dynamics then apply controllers to it,
+one of the most generic problems is the inverted pendulum, so it has alot of people whom already has done it before, so in the learning process, i do not really need to invent a new solution.
+so basically after making the models in mujoco i will start getting its dynamics and state-space model 
+after that iam gonna add them in matlab so it will be our ui, playing with variables such as the damping coeff. or friction or event the model it self (it is kind of easy task), why -> in designing a rl model i do not want to be a generic run it for 1000hrs and it will learn eventually, i wanted to make it more of a global model for multilink inverted pendulum.
+
+so what are the algorithms iam looking to implement
+for conventional: 
+  pid and lqr
+
+for hybrid ones:
+  fuzzy pid
+
+for intellegent:
+  mainly ppo, anfis, (anfis is basically a fuzzy controller with a rl model trying the best design it is simple yet effective)
+  if i got time i will go with fppo
+
+so the plan is to publish a small part in the jac-ecc (the simple thing) and for the more advanced model, i will try to reach abroad for more prestigious lab.
+the timeline:
+  finish the modelling (state-space & dynamics) by 30 or by max 31st of august
+  finish the lqr and pid systems for it in matlab by 3rd of sep by max
+  finish the first paper draft on the 3rd of sep !!!
+  start in another control system before 3rd of sep
+  try to reach a prof to publish in jac-ecc starting from 6th of sep by max isa and must secure an advisor before 12th sep to have time to actually start writing and get along with the doctor.
+  the admission deadline is 3rd of oct.
+
+why the tight deadline because i want to actually use the draft in applying to more competitive scholarships, and for the futuristic presentations etc. and as a refreshment to control course.
