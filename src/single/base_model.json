@@ -1,0 +1,32 @@
+{
+  "model": "single inverted pendulum",
+  "state_convention": "angles relative to upright",
+  "gravity": 9.81,
+  "timestep": 0.005,
+  "cart": {
+    "mass": 2.0,
+    "damping": 0.1,
+    "friction_loss": 0.0,
+    "rail_limit": 1.0
+  },
+  "links": {
+    "mass": [0.5],
+    "length": [0.3],
+    "width": [0.04],
+    "depth": [0.02],
+    "damping": [0.03],
+    "friction_loss": [0.0]
+  },
+  "actuator": {
+    "type": "force",
+    "force_limit": 20.0
+  },
+  "initial": {
+    "cart_position": 0.0,
+    "angles": [3.141592653589793]
+  },
+  "target": {
+    "cart_position": 0.0,
+    "angles": [0.0]
+  }
+}

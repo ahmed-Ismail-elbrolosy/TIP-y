@@ -1,7 +1,7 @@
 [project]
-name = "groopy"
+name = "tipy"
 version = "0.1.0"
-description = "Add your description here"
+description = "Model-oriented inverted-pendulum control experiments"
 readme = "README.md"
 authors = [
     { email = "ahmedismailahmed2004@gmail.com" }
@@ -9,14 +9,16 @@ authors = [
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "gymnasium>=1.3.0",
-    "jax[cuda12]>=0.11.1",
+    "jax>=0.11.1",
     "mujoco>=3.11.0",
     "mujoco-mjx[warp]>=3.11.0",
+    "numpy>=2.0",
 ]
 
-[project.scripts]
-groopy = "groopy:main"
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+]
 
-[build-system]
-requires = ["uv_build>=0.12.5,<0.13.0"]
-build-backend = "uv_build"
+[tool.uv]
+package = false
