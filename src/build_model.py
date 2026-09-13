@@ -24,6 +24,13 @@ def ensure_inertial(body: ET.Element) -> ET.Element:
     return inertial
 
 
+def ensure_named_child(parent: ET.Element, tag: str, name: str) -> ET.Element:
+    child = parent.find(f"{tag}[@name='{name}']")
+    if child is None:
+        child = ET.SubElement(parent, tag, name=name)
+    return child
+
+
 def build(name: str) -> None:
     model_dir = SRC / name
     config = json.loads((model_dir / "base_model.json").read_text())
@@ -65,6 +72,49 @@ def build(name: str) -> None:
     option.set("timestep", f"{config['timestep']:.12g}")
     option.set("gravity", f"0 0 {-float(config['gravity']):.12g}")
     option.set("integrator", "RK4")
+
+    worldbody = root.find("worldbody")
+    if worldbody is None:
+        raise ValueError(f"{name}: worldbody is missing")
+    if name in ("single", "double"):
+        asset = root.find("asset")
+        if asset is None:
+            asset = ET.Element("asset")
+            worldbody_index = next(
+                (index for index, child in enumerate(root) if child.tag == "worldbody"),
+                len(root),
+            )
+            root.insert(worldbody_index, asset)
+        ensure_named_child(asset, "material", "rail_limit_mat").set(
+            "rgba", "0.95 0.55 0.05 1"
+        )
+
+        replay_camera = ensure_named_child(worldbody, "camera", "replay")
+        replay_camera.attrib.update(
+            pos="0 -6 1.4",
+            fovy="50",
+            xyaxes="1 0 0 0 0.15 0.988686",
+        )
+
+        frame = worldbody.find("body[@name='frame']")
+        if frame is None:
+            raise ValueError(f"{name}: frame body is missing")
+        rail_limit = float(config["cart"]["rail_limit"])
+        rail = ensure_named_child(frame, "geom", "rail")
+        rail.attrib.update(
+            type="box",
+            pos="0 0 0.85",
+            size=vector([rail_limit, 0.05, 0.05]),
+            material="metal_mat",
+        )
+        for side, position in (("left", -rail_limit), ("right", rail_limit)):
+            stop = ensure_named_child(frame, "geom", f"rail_limit_{side}")
+            stop.attrib.update(
+                type="box",
+                pos=vector([position, 0.0, 0.95]),
+                size="0.025 0.12 0.1",
+                material="rail_limit_mat",
+            )
 
     cart = root.find("./worldbody/body[@name='cart']")
     if cart is None:
