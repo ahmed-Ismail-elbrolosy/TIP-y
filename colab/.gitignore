@@ -1,0 +1,16 @@
+# Jupyter runtime state
+.ipynb_checkpoints/
+__pycache__/
+
+# Training artifacts stay in configured persistent storage
+**/checkpoints/*
+!**/checkpoints/.gitkeep
+**/training_metrics.csv
+**/training_dashboard.png
+**/metrics.csv
+**/dashboard.png
+**/trajectory.csv
+**/tuned_config.json
+**/*-run/
+*.pkl
+*.npy

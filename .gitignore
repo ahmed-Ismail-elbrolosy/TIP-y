@@ -19,3 +19,20 @@ MUJOCO_LOG.TXT
 .serena/
 .idea/
 .vscode/
+
+# MuJoCo binary model cache
+mjmodel.mjb
+mjmodel.xml
+
+# HTML exports / local guides
+*.html
+
+# Training artifacts at repo root
+dqn_params.pkl
+q_table.npy
+screenshot.png
+
+# Draft / scratch
+draft/
+tmpw2406nsy/
+typings/

@@ -26,7 +26,7 @@
       <geom name="rail_limit_right" type="box" pos="2.2 0 0.95" size="0.025 0.12 0.1" material="rail_limit_mat" />
     </body>
     <body name="cart" pos="0 0 1">
-      <joint name="cart_slide" type="slide" axis="1 0 0" range="-2.2 2.2" frictionloss="0.02" damping="0.1" limited="true" />
+      <joint name="cart_slide" type="slide" axis="1 0 0" range="-2.2 2.2" frictionloss="0.02" damping="0.1" />
       <inertial pos="0 0 0" mass="2" diaginertia="0.0333 0.0333 0.0333" />
       <geom name="cart_geom" type="box" size="0.125 0.08 0.1" mass="2.0" material="cart_mat" />
       <site name="cart_center_site" pos="0 0 0" size="0.02" type="sphere" material="site_mat" />
