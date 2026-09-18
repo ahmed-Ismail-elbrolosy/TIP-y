@@ -6,27 +6,43 @@
   "cart": {
     "mass": 2.0,
     "damping": 0.1,
-    "friction_loss": 0.0,
-    "rail_limit": 1.0
+    "friction_loss": 0.02,
+    "rail_limit": 2.2
   },
   "links": {
-    "mass": [0.5],
-    "length": [0.3],
-    "width": [0.04],
-    "depth": [0.02],
-    "damping": [0.03],
-    "friction_loss": [0.0]
+    "mass": [
+      0.7
+    ],
+    "length": [
+      0.6
+    ],
+    "width": [
+      0.04
+    ],
+    "depth": [
+      0.02
+    ],
+    "damping": [
+      0.03
+    ],
+    "friction_loss": [
+      0.01
+    ]
   },
   "actuator": {
     "type": "force",
-    "force_limit": 20.0
+    "force_limit": 100.0
   },
   "initial": {
     "cart_position": 0.0,
-    "angles": [3.141592653589793]
+    "angles": [
+      3.141592653589793
+    ]
   },
   "target": {
     "cart_position": 0.0,
-    "angles": [0.0]
+    "angles": [
+      0.0
+    ]
   }
 }

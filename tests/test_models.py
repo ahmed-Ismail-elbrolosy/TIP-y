@@ -24,7 +24,10 @@ def test_generated_models_start_hanging_with_direct_sensor_interface() -> None:
         )
         np.testing.assert_allclose(model.qpos0, expected_qpos, atol=1e-12)
         assert not np.any(model.jnt_limited[1:])
-        assert model.ncam == 0
+        if name in ("single", "double"):
+            assert model.camera("replay").id >= 0
+        else:
+            assert model.ncam == 0
 
         expected_sensors = [
             "cart_position",
@@ -52,3 +55,21 @@ def test_hanging_pose_places_every_tip_below_its_hinge() -> None:
             hinge_z = data.site(prefix + "_hinge_site").xpos[2]
             tip_z = data.site(prefix + "_tip_site").xpos[2]
             assert tip_z < hinge_z
+
+
+def test_notebook_models_show_rail_and_limits() -> None:
+    for name in ("single", "double"):
+        build(name)
+        model = mujoco.MjModel.from_xml_path(str(ROOT / "src" / name / "model.xml"))
+        config = json.loads((ROOT / "src" / name / "base_model.json").read_text())
+        rail_limit = float(config["cart"]["rail_limit"])
+
+        rail = model.geom("rail")
+        left = model.geom("rail_limit_left")
+        right = model.geom("rail_limit_right")
+
+        np.testing.assert_allclose(rail.size[0], rail_limit)
+        np.testing.assert_allclose(left.pos[0], -rail_limit)
+        np.testing.assert_allclose(right.pos[0], rail_limit)
+        assert left.size[2] > rail.size[2]
+        assert right.size[2] > rail.size[2]

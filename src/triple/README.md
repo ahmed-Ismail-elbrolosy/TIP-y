@@ -9,11 +9,11 @@ subfolders. `base_model.json` is the canonical editable configuration.
 2. Run `uv run python src/build_model.py triple` to update `model.xml`.
 3. Run `uv run --with mujoco==3.11.0 python src/triple/validate.py`.
 4. In MATLAB, call `load_base_model`; no generated parameter file is needed.
-5. To generate the blockset-based MuJoCo Simulink model, call
-   `build_mujoco_simulink`.
+5. Call `build_mujoco_simulink` for the CPU-safe, headless MuJoCo model.
+6. Call `build_mujoco_simulink_gpu` for the hardware-rendered model.
 
-`build_mujoco_simulink` starts hanging, applies a short force pulse, and logs
-the wrapped, direct-sign MuJoCo state
+Both variants start hanging, apply a short force pulse, and log the wrapped,
+direct-sign MuJoCo state
 `[x, phi1, phi2, phi3, dx, dphi1, dphi2, dphi3]`. The existing
 `lqr/build_simulink` remains the analytical reference model.
 

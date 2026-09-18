@@ -14,29 +14,32 @@
     <material name="cart_mat" rgba="0.82 0.18 0.18 1" />
     <material name="pole_mat" rgba="0.2 0.75 0.3 1" />
     <material name="site_mat" rgba="0.95 0.9 0.15 0.9" />
+    <material name="rail_limit_mat" rgba="0.95 0.55 0.05 1" />
   </asset>
   <worldbody>
+    <camera name="spectate" pos="0 3 1.4" fovy="90" xyaxes="-1 0 0 0 -0.1240 0.9923" />
     <light diffuse="0.7 0.7 0.7" pos="0 0 3.5" dir="0 0 -1" />
     <geom name="floor" type="plane" size="5 5 0.1" material="floor_mat" />
     <body name="frame">
-      <geom name="tower_left" type="box" pos="-1.3 0 0.4" size="0.1 0.15 0.8" material="metal_mat" />
-      <geom name="tower_right" type="box" pos="1.3 0 0.4" size="0.1 0.15 0.8" material="metal_mat" />
-      <geom name="rail" type="box" pos="0 0 0.85" size="1.3 0.05 0.05" material="metal_mat" />
+      <geom name="rail" type="box" pos="0 0 0.85" size="2.2 0.05 0.05" material="metal_mat" />
+      <geom name="rail_limit_left" type="box" pos="-2.2 0 0.95" size="0.025 0.12 0.1" material="rail_limit_mat" />
+      <geom name="rail_limit_right" type="box" pos="2.2 0 0.95" size="0.025 0.12 0.1" material="rail_limit_mat" />
     </body>
     <body name="cart" pos="0 0 1">
-      <joint name="cart_slide" type="slide" axis="1 0 0" range="-1 1" frictionloss="0" damping="0.1" />
+      <joint name="cart_slide" type="slide" axis="1 0 0" range="-2.2 2.2" frictionloss="0.02" damping="0.1" limited="true" />
       <inertial pos="0 0 0" mass="2" diaginertia="0.0333 0.0333 0.0333" />
-      <geom name="cart_geom" type="box" size="0.15 0.08 0.1" mass="2.0" material="cart_mat" />
+      <geom name="cart_geom" type="box" size="0.125 0.08 0.1" mass="2.0" material="cart_mat" />
       <site name="cart_center_site" pos="0 0 0" size="0.02" type="sphere" material="site_mat" />
       <geom name="mount_pin" type="capsule" pos="0 0.095 0" axisangle="1 0 0 1.5708" size="0.015 0.03" material="metal_mat" />
       <body name="pole" pos="0 0.11 0" quat="6.12323399574e-17 0 -1 0">
-        <joint name="pole_hinge" type="hinge" axis="0 -1 0" frictionloss="0" damping="0.03" ref="3.1415926535897931" limited="false" />
-        <inertial pos="0 0 0.15" mass="0.5" diaginertia="0.00376666666667 0.00381666666667 8.33333333333e-05" />
+        <joint name="pole_hinge" type="hinge" axis="0 -1 0" frictionloss="0.01" damping="0.03" ref="3.1415926535897931" limited="false" />
+        <inertial pos="0 0 0.3" mass="0.7" diaginertia="0.0210233333333 0.0210933333333 0.000116666666667" />
         <site name="pole_hinge_site" pos="0 0 0" size="0.015" type="sphere" material="site_mat" />
-        <geom name="pole_geom" type="box" pos="0 0 0.15" size="0.02 0.01 0.15" mass="0.5" material="pole_mat" />
-        <site name="pole_tip_site" pos="0 0 0.3" size="0.015" type="sphere" material="site_mat" />
+        <geom name="pole_geom" type="box" pos="0 0 0.3" size="0.02 0.01 0.3" mass="0.7" material="pole_mat" />
+        <site name="pole_tip_site" pos="0 0 0.6" size="0.015" type="sphere" material="site_mat" />
       </body>
     </body>
+    <camera name="replay" pos="0 6 1.4" fovy="50" xyaxes="-1 0 0 0 -0.15 0.988686" />
   </worldbody>
   <sensor>
     <jointpos name="cart_position" joint="cart_slide" />
@@ -45,6 +48,6 @@
     <jointvel name="pole1_relative_velocity" joint="pole_hinge" />
   </sensor>
   <actuator>
-    <motor name="cart_motor" joint="cart_slide" gear="1" ctrlrange="-20 20" forcerange="-20 20" />
+    <motor name="cart_motor" joint="cart_slide" gear="1" ctrlrange="-100 100" forcerange="-100 100" />
   </actuator>
 </mujoco>

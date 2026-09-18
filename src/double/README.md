@@ -10,8 +10,10 @@ keeping physical parameters and shared dynamics at this model root.
 ## Simulink MuJoCo plant
 
 After installing the MathWorks MuJoCo Simulink Blockset, run
-`build_mujoco_simulink`. The generated model starts hanging, applies a short
-symmetry-breaking force pulse, and logs the direct-sign absolute state:
+`build_mujoco_simulink` for the CPU-safe, headless model. Run
+`build_mujoco_simulink_gpu` for `tipy_double_mujoco_gpu.slx`, which opens the
+MuJoCo hardware-rendered window. Both models start hanging, apply a short
+symmetry-breaking force pulse, and log the direct-sign absolute state:
 
 ```text
 [x, phi1, phi2, dx, dphi1, dphi2]
