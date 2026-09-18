@@ -15,8 +15,7 @@ for intellegent:
   mainly ppo, anfis, (anfis is basically a fuzzy controller with a rl model trying the best design it is simple yet effective)
   if i got time i will go with fppo
 
-so the plan is to publish a small part in the jac-ecc (the simple thing) and for the more advanced model, i will try to reach abroad for more prestigious lab.
-the timeline:
+\the timeline:
   finish the modelling (state-space & dynamics) by 30 or by max 31st of august
   finish the lqr and pid systems for it in matlab by 3rd of sep by max
   start working on dqn for the single pendulum and double if viable.
