@@ -19,9 +19,10 @@ so the plan is to publish a small part in the jac-ecc (the simple thing) and for
 the timeline:
   finish the modelling (state-space & dynamics) by 30 or by max 31st of august
   finish the lqr and pid systems for it in matlab by 3rd of sep by max
-  finish the first paper draft on the 3rd of sep !!!
-  start in another control system before 3rd of sep
-  try to reach a prof to publish in jac-ecc starting from 6th of sep by max isa and must secure an advisor before 12th sep to have time to actually start writing and get along with the doctor.
-  the admission deadline is 3rd of oct.
+  start working on dqn for the single pendulum and double if viable.
+  try to move from single to triple using ppo
+  try to add imitation learning with goal of making a general controller for physically undefined double pendulum (no mass or length are defined), but use imitaiton with an optimal controller (iam picking mcp as a part of my learning journey) to give it an example between each model and the other:
+    for this i would actually prefer doing the single pendulum first since there is a dozen types of optimal controllers that need a look before moving to the imitation
 
-why the tight deadline because i want to actually use the draft in applying to more competitive scholarships, and for the futuristic presentations etc. and as a refreshment to control course.
+  last but not least the tip training (i have stumpled on that video for the tip swingup, it was brilliant, i would like to use it as a pretrain then move with ppo/sac who knows, maybe we might generalize it too.
+
