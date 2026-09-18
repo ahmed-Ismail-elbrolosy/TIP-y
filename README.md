@@ -134,9 +134,9 @@ A MATLAB implementation (not authored here) that derives analytical dynamics via
 
 | Requirement | Details |
 |---|---|
-| JAX backend | `jax[cuda12]` — CUDA 12 required |
+| JAX backend | `jax[cuda12]` — CUDA 12+ required |
 | MJX | `mujoco-mjx` — MuJoCo's JAX physics backend |
-| Recommended GPU | Colab A100 / L4, or any CUDA 12 GPU with ≥ 8 GB VRAM |
+| Recommended GPU | Colab T4, or any CUDA 12+ GPU with ≥ 8 GB VRAM |
 | Compilation | First-run JAX JIT compilation adds ~1–2 min; subsequent steps are fast |
 | Vectorization | 2 048 envs in PPO; scales with available VRAM |
 
