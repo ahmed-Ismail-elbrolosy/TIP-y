@@ -87,7 +87,7 @@ All interactive experiments run on **Google Colab** (GPU runtime recommended) or
 
 **Energy Swing-Up → PID Stabilizer** (`colab/single/classical/`)
 
-An energy-based controller pumps energy into the pendulum until it nears the upright equilibrium, then a PID controller takes over. Simple and interpretable; works reliably for the single pendulum.
+An energy-based controller pumps energy into the pendulum until it nears the upright equilibrium, then a PID controller takes over. Simple and interpretable; works fine (not my finest but suf. as a poc) for the single pendulum.
 
 **Energy Swing-Up → LQR Stabilizer** (`colab/single/classical/`)
 
